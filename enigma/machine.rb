@@ -10,6 +10,8 @@ module Enigma
   class Machine
     attr_reader :input, :output, :plugboard, :rotors, :reflector, :rotors_block
     def initialize(config)
+      Letters.configure!(config.letters)
+
       @reflector    = Reflector.new config.reflector
       @rotors       = config.rotors.map {|conf| Rotor.new conf }
       @plugboard    = Plugboard.new config.plugboard

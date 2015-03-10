@@ -26,29 +26,33 @@ module Enigma
       destroy! if exists?
     end
 
-    def method_missing(element)
-      element_path = root.join('enigma', "#{element}.rb")
-      if element_path.exist?
-        ::Kernel.require element_path.to_s
-        config element
+    def method_missing(method_name, *args)
+      if method_name =~ /^(\w+)=$/
+        return set_config($1, args[0])
       else
-        super
+        element = method_name.to_s
+        element_path = root.join('enigma', "#{element}.rb")
+        if element_path.exist?
+          ::Kernel.require element_path.to_s
+          return get_config element
+        end
       end
+
+      super
     end
 
     protected
-    def config(element)
-      element = element.to_s
+    def get_config(element)
       @config ||= {}
-
       load! if exists? && !loaded?
-
-      unless @config[element]
-        @config[element] = Helpers._get_element_class(element).default_config
-        save!
-      end
-
+      set_config(element, Helpers._get_element_class(element).default_config) unless @config[element]
       @config[element]
+    end
+
+    def set_config(element, value)
+      @config ||= {}
+      @config[element] = value
+      save!
     end
 
     def save!

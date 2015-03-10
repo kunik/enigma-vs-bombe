@@ -6,7 +6,18 @@ require_relative '../enigma/config'
 config = Enigma::Config.new
 config.reset!
 
+if ARGV[0]
+  letters = ARGV[0].chars.uniq
+  unless letters.count % 2 == 0
+    puts 'Amount of letters should be EVEN!'
+    exit 1
+  end
+  config.letters = ARGV[0].upcase.chars
+  Enigma::Letters.configure!(config.letters)
+end
+
 puts 'New Enigma Configuration:'
+puts "\tLetters: #{config.letters.join(' ')}" if ARGV[0]
 puts "\tPlugboard: #{config.plugboard.map{|k, v| "#{k}#{v}" }.join ' '}"
 puts "\tRotors:"
 config.rotors.each do |x|

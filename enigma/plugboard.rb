@@ -11,7 +11,7 @@ module Enigma
 
     class << self
       def default_config
-        Hash[*Letters.to_a.shuffle.take(20)]
+        Hash[*Letters.shuffle.take(20)]
       end
     end
   end

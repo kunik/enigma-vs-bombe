@@ -1,10 +1,9 @@
 #!/usr/bin/env ruby
 
 require 'yaml'
-require_relative '../enigma/config'
 require_relative '../enigma'
 
 config = Enigma::Config.new
 enigma = Enigma.configure config
 
-puts ARGV.map { |str| enigma.process str.upcase.tr('^A-Z', '') }.join ' '
+puts ARGV.map { |str| enigma.process str.upcase.tr("^(#{Enigma::Letters.join('|')})", '') }.join ' '
