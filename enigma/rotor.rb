@@ -3,6 +3,7 @@ require_relative 'wiring'
 
 module Enigma
   class Rotor < Wiring
+    default_config { Letters.range.to_a.shuffle }
     def initialize(mapping)
       @original_mapping = mapping
       reset!
@@ -24,12 +25,6 @@ module Enigma
 
     def reset!
       @mapping = @original_mapping.dup
-    end
-
-    class << self
-      def default_config
-        Letters.range.to_a.shuffle
-      end
     end
   end
 end

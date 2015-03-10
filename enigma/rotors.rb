@@ -1,15 +1,9 @@
 require_relative 'rotor'
+require_relative 'concerns/configurable'
 
 module Enigma
   class Rotors
-    class << self
-      def range
-        (0..2)
-      end
-
-      def default_config
-        range.map { Rotor.default_config }
-      end
-    end
+    extend Configurable
+    default_config { (0..2).map { Rotor.default_config } }
   end
 end
