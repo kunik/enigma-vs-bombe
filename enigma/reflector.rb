@@ -7,9 +7,10 @@ module Enigma
       @mapping = mapping
       @mapping.merge! @mapping.invert
     end
+
     class << self
       def default_config
-        Hash[*(0..Letters.count - 1).to_a.shuffle]
+        Hash[*Letters.range.to_a.shuffle]
       end
     end
   end

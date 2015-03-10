@@ -28,7 +28,7 @@ module Enigma
 
     class << self
       def default_config
-        (0..Letters.count - 1).to_a.shuffle
+        Letters.range.to_a.shuffle
       end
     end
   end
