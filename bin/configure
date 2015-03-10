@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require 'yaml'
+require_relative '../enigma/config'
+
+config = Enigma::Config.new
+config.reset!
+
+puts 'New Enigma Configuration:'
+puts "\tPlugboard: #{config.plugboard.map{|k, v| "#{k}#{v}" }.join ' '}"
+puts "\tRotors:"
+config.rotors.each do |x|
+  puts "\t\t - #{x.join(', ')}"
+end
+puts "\tReflector: #{config.reflector.map{|k, v| "#{k}-#{v}" }.join ', '}"
