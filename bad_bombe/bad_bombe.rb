@@ -20,6 +20,11 @@ module BadBombe
       end
     end
 
+    def key_rotors
+      @root = ::Pathname.new ::File.expand_path('../..', __FILE__)
+      ::YAML::load_file(@root.join('bombe_key.yml'))['rotors']
+    end
+
     private
     def _init_config
       @test_register ||= BadBombe::TestRegister.new(@input, @crip)
