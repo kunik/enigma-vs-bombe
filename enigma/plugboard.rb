@@ -3,16 +3,12 @@ require_relative 'wiring'
 
 module Enigma
   class Plugboard < Wiring
+    default_config { Hash[*Letters.shuffle.take(20)] }
+
     def initialize(pairs)
       @mapping = pairs.dup
       @mapping.default_proc = proc { |hash, key| key }
       @mapping.merge! @mapping.invert
-    end
-
-    class << self
-      def default_config
-        Hash[*Letters.shuffle.take(20)]
-      end
     end
   end
 end

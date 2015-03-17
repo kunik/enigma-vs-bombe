@@ -3,7 +3,7 @@ require_relative './test_register'
 
 Enigma::Config.include ::Kernel
 
-module Bombe
+module BadBombe
   class Machine
     attr_reader :input, :crip
 
@@ -22,7 +22,7 @@ module Bombe
 
     private
     def _init_config
-      @test_register ||= Bombe::TestRegister.new(@input, @crip)
+      @test_register ||= BadBombe::TestRegister.new(@input, @crip)
     end
 
     def _atempt

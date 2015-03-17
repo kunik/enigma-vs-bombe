@@ -1,6 +1,6 @@
 require_relative '../enigma'
 
-module Bombe
+module BadBombe
   class Drum
     attr_reader :mapping
     def initialize mapping

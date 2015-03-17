@@ -13,6 +13,10 @@ module Enigma
       Letters.define_singleton_method(:default_config) do
         letters
       end
+
+      Letters.define_singleton_method(:range) do
+        (0..letters.count-1)
+      end
     end
 
     define_letters.call ('A'..'Z').to_a

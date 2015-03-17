@@ -1,13 +1,13 @@
 require_relative './drums_block'
 
-module Bombe
+module BadBombe
   class TestRegister
     attr_reader :drums, :drums_block, :key_path
 
     def initialize(input, crip)
       @input       = input
       @crip        = crip
-      @drums_block = Bombe::DrumsBlock.new()
+      @drums_block = BadBombe::DrumsBlock.new()
       @root        = ::Pathname.new ::File.expand_path('../..', __FILE__)
       _save!
     end
@@ -24,7 +24,7 @@ module Bombe
     def _save!
       path             = @root.join('config.yml')
       config           = ::YAML::load_file(path)
-      config['rotors'] = @drums_block.drums.map(&:mapping)
+      config['rotors'] = @drums_block.drums
       ::File.open(path, 'w') do |f|
         f.write config.to_yaml
       end
